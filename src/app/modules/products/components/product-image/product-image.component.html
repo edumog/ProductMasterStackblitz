@@ -1,0 +1,4 @@
+<div *ngIf="isImageLoading" style="width: 100px; height: 100px;" class="spinner-border text-secondary" role="status">
+    <span class="sr-only">Cargando...</span>
+</div>
+<img #image style="max-width: 100px; max-height: 100px;" [src]="src" alt="product.name" [ngClass]="{'hide': isImageLoading}">

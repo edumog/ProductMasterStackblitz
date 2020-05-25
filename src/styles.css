@@ -1,0 +1,12 @@
+.form-container {
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+.hide {
+    display: none;
+}
+
+.align-center {
+    text-align: center;
+}

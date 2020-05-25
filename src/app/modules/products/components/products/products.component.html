@@ -1,0 +1,72 @@
+<div *ngIf="!isCountriesLoading">
+    <header class="filters">
+        <h3 class="align-center">Listado de productos</h3>
+
+        <button type="button" class="btn btn-success" routerLink="/products/register-product">Crear producto</button>
+
+        <form class="filters-form" [formGroup]="filtersForm" (ngSubmit)="applyFilters()">
+            <div class="form-group filter">
+                <label>País de procedencia</label>
+                <select formControlName="country">
+                    <option value="">Todos</option>
+                    <option [value]="country.name" *ngFor="let country of countries">{{ country.name }}</option>
+                </select>
+            </div>
+        
+            <div class="form-group filter">
+                <label>Unidades vendidas</label>
+                <input type="number" step="1" min="0" placeholder="Mínimo" formControlName="minValue">
+                <input type="number" step="1" min="0" placeholder="Máximo" formControlName="maxValue">
+            </div>
+            <button class="btn btn-primary">Aplicar filtros</button>
+        </form>
+    </header>
+    
+    <table class="table table-striped table-hover table-responsive products">
+        <thead>
+            <th>
+                Id
+                <div #sorButton (click)="sortById()" class="sort-button" [ngClass]="{'invert': isItSortAscendingById}">
+                    <span class="icon-circle-down"></span> 
+                </div>
+            </th>
+            <th>
+                Nombre
+                <div (click)="sortByName()" class="sort-button" [ngClass]="{'invert': isItSortAscendingByName}">
+                    <span class="icon-circle-down"></span> 
+                </div>             
+            </th>
+            <th>Características</th>
+            <th>Fecha de lanzamiento</th>
+            <th>Correo del fabricante</th>
+            <th>País de fabricación</th>
+            <th>Precio</th>
+            <th>Unidades disponibles</th>
+            <th>Unidades vendidas</th>
+            <th>Imagen del producto</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.features }}</td>
+                <td>{{ product.releaseDate }}</td>
+                <td>{{ product.manufacturerEmail }}</td>
+                <td>{{ product.countryOfManufacture }}</td> 
+                <td>{{ product.price }}</td>
+                <td>{{ product.unitsAvailable}}</td>
+                <td>{{ product.soldUnits }}</td>
+                <td><app-product-image [src]="product.image"></app-product-image></td>
+                <td>
+                    <div class="justify-content-center button-delete">
+                        <span class="icon-bin2 align-middle" (click)="delete(product.id)"></span>
+                    </div>
+                </td>
+            </tr>    
+        </tbody>
+    </table>
+    <div class="pagination-controls">
+        <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    </div>
+</div>

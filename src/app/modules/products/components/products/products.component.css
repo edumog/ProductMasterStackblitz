@@ -1,0 +1,62 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.filters {
+    padding: 1em;
+}
+
+.filters-form {
+    text-align: center;
+}
+
+.filter {
+    display: inline;
+    padding: 0 1em 0 0;
+}
+
+.filter label {
+    padding-right: 1em;
+}
+
+.form-group .filter input {
+    background-color: red;
+}
+
+.products, th, td {
+    margin: 0 auto;
+}
+
+.products thead th, .products tbody tr td {
+    padding: .5em;
+    max-width: 200px;
+    min-width: 70px;
+}
+
+.pagination-controls {
+    text-align: center;
+}
+
+.sort-button{
+    display: inline-block;
+    transition: all 500ms ease;
+}
+
+.invert{
+    transform: rotate(180deg);
+}
+
+.button-delete {
+    padding-top: 1.5em;
+}
+
+.icon-bin2 {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #3a3337;
+    transition: all 250ms ease;
+}
+
+.icon-bin2:hover {
+    color: #600707;
+}

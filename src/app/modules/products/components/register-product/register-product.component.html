@@ -1,0 +1,78 @@
+<h2>Registrar nuevo producto</h2>
+
+<div class="form-container" *ngIf="!isCountriesLoading">
+    <form [formGroup]="productForm" (ngSubmit)="sendForm()">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input class="form-control" type="text" formControlName="name" [ngClass]="{'is-invalid': (!productForm.get('name').valid && productForm.get('name').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('name').errors?.required && productForm.get('name').touched">
+                Este campo es requerido.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="features">Características</label>
+            <input class="form-control" type="text" formControlName="features" [ngClass]="{'is-invalid': (!productForm.get('features').valid && productForm.get('features').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('features').errors?.required && productForm.get('features').touched">
+                Este campo es requerido.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="release-date">Fecha de lanzamiento</label>
+            <input class="form-control" type="date" formControlName="releaseDate">
+        </div>
+        <div class="form-group">
+            <label for="manufacturer-email">Correo del fabricante</label>
+            <input class="form-control" type="email" formControlName="manufacturerEmail" [ngClass]="{'is-invalid': (!productForm.get('manufacturerEmail').valid && productForm.get('manufacturerEmail').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.controls['manufacturerEmail'].errors?.pattern && productForm.controls['manufacturerEmail'].touched">
+                ¡Ingrese una dirección de correo electrónica valida!
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="country-of-manufacture">País de fabricación</label>
+            <select class="form-control" formControlName="countryOfManufacture" [ngClass]="{'is-invalid': (!productForm.get('countryOfManufacture').valid && productForm.get('countryOfManufacture').touched )}">
+                <option [value]="country.name" *ngFor="let country of countries">{{ country.name }}</option>
+            </select>
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('countryOfManufacture').errors?.required && productForm.get('countryOfManufacture').touched">
+                Este campo es requerido.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input class="form-control" type="number" step=".01" min="0" formControlName="price" [ngClass]="{'is-invalid': (!productForm.get('price').valid && productForm.get('price').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('price').errors?.required && productForm.get('price').touched">
+                Este campo es requerido.
+            </span>
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('price').errors?.min && productForm.get('price').touched">
+                El valor no pude ser inferior a 0.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="units-available">Unidades disponibles</label>
+            <input class="form-control" type="number" step="1" min="0" formControlName="unitsAvailable" [ngClass]="{'is-invalid': (!productForm.get('unitsAvailable').valid && productForm.get('unitsAvailable').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('unitsAvailable').errors?.required && productForm.get('unitsAvailable').touched">
+                Este campo es requerido.
+            </span>
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('unitsAvailable').errors?.min && productForm.get('unitsAvailable').touched">
+                El valor no pude ser inferior a 0.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="sold-units">Unidades vendidas</label>
+            <input class="form-control" type="number" step="1" min="0" formControlName="soldUnits" [ngClass]="{'is-invalid': (!productForm.get('soldUnits').valid && productForm.get('soldUnits').touched )}">
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('soldUnits').errors?.required && productForm.get('soldUnits').touched">
+                Este campo es requerido.
+            </span>
+            <span class="form-control-feedback invalid-feedback" *ngIf="productForm.get('soldUnits').errors?.min && productForm.get('soldUnits').touched">
+                El valor no pude ser inferior a 0.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="image">Imagen</label>
+            <input class="form-control" type="file" formControlName="image" (change)="setImage($event)">
+        </div>
+        <div class='align-center'>
+            <button class="btn btn-primary" [disabled]="productForm.status === 'INVALID' || productForm.status === 'PENDING'">Guardar</button>
+            <button class="btn btn-danger" style="margin: .5em" routerLink="/home">Cerrar</button>
+        </div>       
+    </form>
+</div>

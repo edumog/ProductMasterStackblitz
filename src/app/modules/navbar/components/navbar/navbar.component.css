@@ -1,0 +1,11 @@
+.bg-custom {
+    background-color: #b7dbb8;
+}
+
+.navbar-text a {
+    padding-right: 1em;
+}
+
+.nav-item a {
+    cursor: pointer;
+}
