@@ -10,7 +10,7 @@ import { MainModule } from './modules/main/main.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 @NgModule({
